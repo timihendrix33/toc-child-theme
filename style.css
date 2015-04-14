@@ -26,6 +26,17 @@ body .navbar #menu-main-menu.nav{
 	margin-left: 20px;
 }
 .categories-links {display: none !important;}
+/* 404 Page */
+body[class*="404"] #mashhead, body[class*="404"] .handheld-header{
+	clip:auto !important;
+}
+body[class*="404"] #page {
+	text-align: left !important;
+}
+body[class*="404"] #page .entry-content {
+	text-align: center !important;
+	margin-bottom: 100px;
+}
 /* Logo */
 .toc-logo{float:left;}
 body .navbar .brand.no-logo-image {
