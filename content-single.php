@@ -69,8 +69,9 @@
 				</div>
 			</div>
 			<?php 
-				if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail
-				the_post_thumbnail('large');
+				$meta = get_post_meta( get_the_ID(), 'insert_post_disabled', true );
+				if ( has_post_thumbnail() && !$meta == 1 ) { // check if the post has a Post Thumbnail
+				the_post_thumbnail(array(300,169), array( 'class' => 'alignleft' ));
 				} 
 			?>
 		</header>

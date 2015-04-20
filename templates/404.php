@@ -1,13 +1,13 @@
 <?php
-  /*Template Name: Error*/
-?>
-
-<?php get_header(); ?>
+/**
+ * Template Name: 404
+ */
+ get_header(); ?>
+ 
 
 <div class="entry-content">
-    <?php $recent = new WP_Query("page_id=2109"); while($recent->have_posts()) : $recent->the_post();?>
-        <?php the_content(); ?>
-    <?php endwhile; ?>    
+    Look like something went wrong! The page you were looking for is not here <br> 
+    Check on <a href="http://archive.thoughtsoncloud.com">archive.thoughtsoncloud.com</a> or try a search:
     <div class="search-form">
         <?php get_search_form(); ?>
         <i class="icon-search"></i>
@@ -27,15 +27,15 @@
                     }
                     $paged = get_query_var( $page_var ) ? get_query_var( $page_var ) : 1;
                     $featuredtag = get_tag_id_by_name('featured');
-                    $videocat = get_cat_ID( 'video' );
-                    $eventcat = get_cat_ID( 'events' );
-                    $args=array(
-                    'tag__not_in' => array($featuredtag),
-                    'post_type=post&paged='.$paged,
-                    'category__not_in' => array($eventcat,$videocat),
-                    'paged' => $paged
-                    );
-                    $wp_query = new WP_Query($args);
+					$videocat = get_cat_ID( 'video' );
+					$eventcat = get_cat_ID( 'events' );
+		            $args=array(
+					'tag__not_in' => array($featuredtag),
+					'post_type=post&paged='.$paged,
+					'category__not_in' => array($eventcat,$videocat),
+					'paged' => $paged
+					);
+					$wp_query = new WP_Query($args);
                 ?>
                 <?php if ( $wp_query->have_posts() ) : ?>
                     <?php while ( $wp_query->have_posts() ) : $wp_query->the_post(); ?>
@@ -56,3 +56,4 @@
     </div>
 </div>
 <?php get_footer(); ?>
+

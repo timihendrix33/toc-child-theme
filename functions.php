@@ -77,4 +77,63 @@ function toc_footer() { ?>
     </div>
 </footer>
 <?php }
+
+
+/**
+ * Post options
+ */
+function insert_featured_image_add_meta_box() {
+  // get_post_types() only included in WP 2.9/3.0
+  $post_types = ( function_exists( 'get_post_types' ) ) ? get_post_types( array( 'public' => true ) ) : array( 'post', 'page' ) ;
+  
+  $title = apply_filters( 'insert_featured_image_meta_box_title', __( 'Insert Featured Image in Article', 'insert-featured-image' ) );
+  foreach( $post_types as $post_type ) {
+    add_meta_box( 'insert_featured_image_meta', $title, 'insert_featured_image_meta_box_content', $post_type, 'advanced', 'high' );
+  }
+}
+
+function insert_featured_image_meta_box_content( $post ) {
+  do_action( 'start_insert_featured_image_meta_box_content', $post );
+
+  $disabled = get_post_meta( $post->ID, 'insert_post_disabled', true ); ?> 
+
+  <p>
+    <label for="enable_post_insert_featured_image">
+      <input type="checkbox" name="enable_post_insert_featured_image" id="enable_post_insert_featured_image" value="1" <?php checked( empty( $disabled ) ); ?>>
+      <?php _e( 'Insert Featured Image into article body' , 'insert-featured-image'); ?>
+    </label>
+    <input type="hidden" name="insert_featured_image_status_hidden" value="1" />
+  </p>
+
+  <?php
+  do_action( 'end_insert_featured_image_meta_box_content', $post );
+}
+
+function insert_featured_image_meta_box_save( $post_id ) {
+  // If this is an autosave, this form has not been submitted, so we don't want to do anything.
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+    return $post_id;
+
+  // Save insert_post_disabled if "Insert Featured Image into article body" checkbox is unchecked
+  if ( isset( $_POST['post_type'] ) ) {
+    if ( current_user_can( 'edit_post', $post_id ) ) {
+      if ( isset( $_POST['insert_featured_image_status_hidden'] ) ) {
+        if ( !isset( $_POST['enable_post_insert_featured_image'] ) ) {
+          update_post_meta( $post_id, 'insert_post_disabled', 1 );
+        } else {
+          delete_post_meta( $post_id, 'insert_post_disabled' );
+        }
+      }
+    }
+  }
+
+  return $post_id;
+}
+
+add_action( 'admin_init', 'insert_featured_image_add_meta_box' );
+add_action( 'save_post', 'insert_featured_image_meta_box_save' );
+
+
+
+
 ?>

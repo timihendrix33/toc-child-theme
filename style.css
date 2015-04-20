@@ -33,9 +33,10 @@ body[class*="404"] #mashhead, body[class*="404"] .handheld-header{
 body[class*="404"] #page {
 	text-align: left !important;
 }
-body[class*="404"] #page .entry-content {
+body[class*="404"] .entry-content {
 	text-align: center !important;
-	margin-bottom: 100px;
+	margin-bottom: 100px !important;
+	height: auto !important;
 }
 /* Logo */
 .toc-logo{float:left;}
