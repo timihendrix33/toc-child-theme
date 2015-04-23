@@ -5,13 +5,7 @@
 <?php get_header(); ?>
 
 <div class="entry-content">
-    <?php $recent = new WP_Query("page_id=2109"); while($recent->have_posts()) : $recent->the_post();?>
-        <?php the_content(); ?>
-    <?php endwhile; ?>    
-    <div class="search-form">
-        <?php get_search_form(); ?>
-        <i class="icon-search"></i>
-    </div>
+    <?php dynamic_sidebar( 'not_found' ); ?>
 </div>
 <div id="primary"> 
     <div id="content"> 

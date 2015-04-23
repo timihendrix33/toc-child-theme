@@ -1,4 +1,4 @@
-<article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
+ <article id="post-<?php the_ID(); ?>" <?php post_class('clearfix'); ?>>
 	<div class="entry-inner">
 			<header class="entry-header">
 			<h1 class="entry-title"><?php the_title(); ?></h1>
@@ -60,7 +60,7 @@
 					</div>
 					<ul class="unstyled entry-actions">
 						<li><a href="javscript:void(0)" onclick="window.print();"><i class="icon-print"></i></a></li>
-						<li><a href="mailto:<?php echo get_option( 'admin_email' ); ?>?Subject=<?php echo urlencode( get_the_title() ); ?>"><i class="icon-envelope-alt"></i></a></li>
+						<li><a href="mailto:?body=Article: <?php echo urlencode( the_permalink() )?>?Subject=<?php echo urlencode( get_the_title() ); ?>?"><i class="icon-envelope-alt"></i></a></li>
 						<li>
 							<a href="#" class="font-size-plus"> A+ </a>
 							<a href="#" class="font-size-minus"> A-</a>

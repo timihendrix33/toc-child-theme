@@ -80,7 +80,7 @@ function toc_footer() { ?>
 
 
 /**
- * Post options
+ * Adding featured image to post option
  */
 function insert_featured_image_add_meta_box() {
   // get_post_types() only included in WP 2.9/3.0
@@ -133,7 +133,23 @@ function insert_featured_image_meta_box_save( $post_id ) {
 add_action( 'admin_init', 'insert_featured_image_add_meta_box' );
 add_action( 'save_post', 'insert_featured_image_meta_box_save' );
 
+/**
+ * Register 404 Widget area
+ *
+ */
+function not_found_widgets_init() {
 
+  register_sidebar( array(
+    'name'          => '404 page',
+    'id'            => 'not_found',
+    'before_widget' => '<div>',
+    'after_widget'  => '</div>',
+    'before_title'  => '<h2>',
+    'after_title'   => '</h2>',
+  ) );
+
+}
+add_action( 'widgets_init', 'not_found_widgets_init' );
 
 
 ?>
